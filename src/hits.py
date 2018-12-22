@@ -37,11 +37,12 @@ def get_hits(links):
         new_authorities = np.dot(adj_matrix.T, hubs)
         new_hubs = np.dot(adj_matrix, authorities)
 
-        normalize_auth = lambda x: x / sum(authorities)
-        normalize_hubs = lambda x: x / sum(hubs)
+        # normalization
+        normalize_auth = lambda x: x / sum(new_authorities)
+        normalize_hubs = lambda x: x / sum(new_hubs)
         new_authorities = normalize_auth(new_authorities)
         new_hubs = normalize_hubs(new_hubs)
-        # TODO: Fix not coverage
+
         diff = abs(sum(new_hubs - hubs) + sum(new_authorities - authorities))
         if diff < EPSILON:
             is_coverage = True
@@ -49,6 +50,5 @@ def get_hits(links):
             authorities = new_authorities
             hubs = new_hubs
 
-    print(hubs)
-    print(authorities)
+    return (new_hubs, new_authorities)
 

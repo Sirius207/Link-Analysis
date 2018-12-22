@@ -1,13 +1,10 @@
 from src.hits import get_hits
 
 
-
 def main(args):
     with open(args.input, 'r') as input:
         links = input.readlines()
-        get_hits(links)
-
-
+        hubs, authorities =  get_hits(links)
 
 
 
