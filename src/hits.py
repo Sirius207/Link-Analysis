@@ -30,19 +30,23 @@ def get_hits(links):
 
     adj_matrix = generate_adj_matrix(node_lists)
 
+    # initialize to all 1's
     is_coverage = False
     hubs = np.ones(adj_matrix.shape[0])
-    authorities = np.dot(adj_matrix.T, hubs)
+    authorities = np.ones(adj_matrix.shape[0])
+
     while not is_coverage:
+        # a = A.T h, h = A a,
         new_authorities = np.dot(adj_matrix.T, hubs)
         new_hubs = np.dot(adj_matrix, authorities)
 
-        # normalization
+        # normalize
         normalize_auth = lambda x: x / sum(new_authorities)
         normalize_hubs = lambda x: x / sum(new_hubs)
         new_authorities = normalize_auth(new_authorities)
         new_hubs = normalize_hubs(new_hubs)
 
+        # check is coverage
         diff = abs(sum(new_hubs - hubs) + sum(new_authorities - authorities))
         if diff < EPSILON:
             is_coverage = True
