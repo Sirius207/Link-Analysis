@@ -26,6 +26,15 @@ def generate_adj_matrix(node_lists):
 
 
 def get_hits(links):
+    """[summary]
+        hubs & authorities calculation
+    Arguments:
+        links {str[]} -- [input string lists like ['1,2', '3,4]]
+
+    Returns:
+        [(int[], int[])] -- [return hubs & authorities]
+    """
+
     node_lists = list(map(links_to_nodes, links))
 
     adj_matrix = generate_adj_matrix(node_lists)
