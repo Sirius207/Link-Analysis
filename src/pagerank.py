@@ -6,8 +6,21 @@ def normalize_row(row):
     return normalize(row)
 
 
-
 def get_pagerank(adj_matrix, DAMPING_FACTOR=0.15, EPSILON=0.01):
+    """[summary]
+        pagerank values calculation
+
+    Arguments:
+        adj_matrix {[float[][]]} -- [[input Adjacent matrix lists like [[1, 0], [0, 1]]]
+
+    Keyword Arguments:
+        DAMPING_FACTOR {float} -- [factor of residual probability] (default: {0.15})
+        EPSILON {float} -- [factor of change comparision] (default: {0.01})
+
+    Returns:
+        [float[]] -- [pagerank values]
+    """
+
     # initialize
     page_length = adj_matrix.shape[0]
     pagerank = np.ones(page_length)
