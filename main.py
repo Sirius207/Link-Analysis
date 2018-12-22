@@ -1,11 +1,13 @@
+from src.utils import get_adj_matrix
 from src.hits import get_hits
 
 
 def main(args):
     with open(args.input, 'r') as input:
         links = input.readlines()
-        hubs, authorities =  get_hits(links)
 
+        adj_matrix = get_adj_matrix(links)
+        hubs, authorities =  get_hits(adj_matrix)
 
 
 if __name__ == '__main__':
