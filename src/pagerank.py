@@ -1,11 +1,6 @@
 import numpy as np
 
 
-def normalize_row(row):
-    normalize = lambda x: x / sum(row)
-    return normalize(row)
-
-
 def get_pagerank(adj_matrix, DAMPING_FACTOR=0.15, EPSILON=0.01):
     """[summary]
         pagerank values calculation
