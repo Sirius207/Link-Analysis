@@ -1,13 +1,11 @@
 import numpy as np
 
-EPSILON = 0.001
-
-
-def get_hits(adj_matrix):
+def get_hits(adj_matrix, EPSILON = 0.001):
     """[summary]
         hubs & authorities calculation
     Arguments:
         adj_matrix {float[][]} -- [input Adjacent matrix lists like [[1, 0], [0, 1]]
+        EPSILON {float} -- [factor of change comparision] (default: {0.001})
 
     Returns:
         [(float[], float[])] -- [return hubs & authorities]
