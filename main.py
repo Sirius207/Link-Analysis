@@ -1,4 +1,6 @@
 import logging
+import pandas as pd
+
 from src.utils import get_adj_matrix
 from src.hits import get_hits
 from src.pagerank import get_pagerank
@@ -13,13 +15,19 @@ def main(args):
         links = input.readlines()
 
         adj_matrix = get_adj_matrix(links)
-        # hubs, authorities = get_hits(adj_matrix)
-        # pagerank = get_pagerank(adj_matrix)
-        print(adj_matrix.T)
-        compare_nodes = (1,2)
+        hubs, authorities = get_hits(adj_matrix)
+        pagerank = get_pagerank(adj_matrix)
+        # simRank  calculation
+        compare_nodes = (1, 2)
         simrank = get_simrank(compare_nodes, adj_matrix)
+
+        logger.info(f'hubs: {hubs}, authorities: {authorities}')
+        logger.info(f'pageRank: {pagerank}')
         logger.info(f'simRank: {simrank}')
 
+        results = pd.DataFrame({"hubs": hubs, "authorities": authorities, "pagerank": pagerank})
+        results.index.name = 'node'
+        results.to_csv(args.output)
 
 
 if __name__ == '__main__':
@@ -27,10 +35,10 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--input',
-                        default='./data/graph_3.txt',
+                        default='./data/graph_4.txt',
                         help='input graph data file name')
     parser.add_argument('--output',
-                        default='output.csv',
+                        default='exp/output.csv',
                         help='output file name')
     args = parser.parse_args()
 
