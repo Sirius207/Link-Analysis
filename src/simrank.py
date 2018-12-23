@@ -7,6 +7,20 @@ def get_parents(node, adj_matrix):
 
 
 def get_simrank(nodes, adj_matrix, C=0.5, level=1):
+    """[summary]
+        simRank calculation
+    Arguments:
+        nodes {[(int, int)]} -- [nodes to compare similarity]
+        adj_matrix {[float[][]]} -- [[input Adjacent matrix lists like [[1, 0], [0, 1]]]
+
+    Keyword Arguments:
+        C {float} -- [decay factor] (default: {0.5})
+        level {int} -- [parent level to prevent unstopped tracing] (default: {1})
+
+    Returns:
+        [float] -- [sinRank value]
+    """
+
     nodes_parents = [get_parents(node, adj_matrix) for node in nodes]
 
     if len(nodes_parents[0]) == 0 or len(nodes_parents[1]) == 0 or C**level < 0.01:
