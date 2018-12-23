@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def get_pagerank(adj_matrix, DAMPING_FACTOR=0.15, EPSILON=0.001):
+def get_pagerank(adj_matrix, DAMPING_FACTOR=0.15, EPSILON=0.01):
     """[summary]
         pagerank values calculation
 
@@ -19,17 +19,15 @@ def get_pagerank(adj_matrix, DAMPING_FACTOR=0.15, EPSILON=0.001):
     # initialize
     page_length = adj_matrix.shape[0]
     pagerank = np.ones(page_length)
-    new_pagerank = np.ones(page_length)
-    escape = DAMPING_FACTOR / page_length
+    escape = np.ones(page_length) * (DAMPING_FACTOR / page_length)
 
     # normalize
     normalize_adj_matrix = adj_matrix / np.linalg.norm(adj_matrix, ord=1, axis=1, keepdims=True)
     normalize_adj_matrix = np.nan_to_num(normalize_adj_matrix)
+
     is_coverage = False
     while not is_coverage:
-        for node in range(page_length):
-            single_rank = escape + (1-DAMPING_FACTOR) * np.dot(normalize_adj_matrix.T, new_pagerank)[node]
-            new_pagerank[node] = single_rank
+        new_pagerank = escape + (1-DAMPING_FACTOR) * np.dot(normalize_adj_matrix.T, pagerank)
 
         # normalize pagerank
         normalize_pagerank = lambda x: x / sum(new_pagerank)
@@ -37,10 +35,9 @@ def get_pagerank(adj_matrix, DAMPING_FACTOR=0.15, EPSILON=0.001):
 
         # check is coverage
         diff = abs(sum(new_pagerank - pagerank))
-
         if diff < EPSILON:
             is_coverage = True
         else:
-            pagerank = new_pagerank.copy()
+            pagerank = new_pagerank
 
-    return new_pagerank
+    return pagerank
