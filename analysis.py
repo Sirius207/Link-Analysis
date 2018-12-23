@@ -5,6 +5,7 @@ from src.hits import get_hits
 
 exp_links = ['','1,3','1,4','1,5','1,6']
 
+add_column = 'add_link'
 base_path = './exp/graph_1'
 
 def run(input_path):
@@ -25,8 +26,11 @@ def run(input_path):
             total_authority.append(authorities)
 
         hub_results = pd.DataFrame(total_hubs)
+        hub_results[add_column] = exp_links
         hub_results.to_csv(base_path + '/hubs.csv')
+
         authorities_results = pd.DataFrame(total_authority)
+        authorities_results[add_column] = exp_links
         authorities_results.to_csv(base_path + '/authority.csv')
 
 
