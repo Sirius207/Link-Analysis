@@ -25,6 +25,7 @@ def main(args):
         logger.info(f'pageRank: {pagerank}')
         logger.info(f'simRank: {simrank}')
 
+        # Output values to files
         results = pd.DataFrame({"hubs": hubs, "authorities": authorities, "pagerank": pagerank})
         results.index.name = 'node'
         results.to_csv(args.output)
