@@ -42,7 +42,7 @@ def run(input_path):
         authorities_results.to_csv(base_path + '/authority.csv')
 
         # write pagerank results
-        pagerank_results = pd.DataFrame(total_authority)
+        pagerank_results = pd.DataFrame(total_pagerank)
         pagerank_results[add_column] = exp_links
         pagerank_results.to_csv(base_path + '/pagerank.csv')
 
