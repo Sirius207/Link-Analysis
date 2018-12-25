@@ -22,4 +22,4 @@ python main.py --input data/graph_1.txt --output output.csv
 - IBM Quest Synthetic Data Generator
 
 ## Report
-- [Jupyter Notebook]()
+- [Jupyter Notebook](https://nbviewer.jupyter.org/github/Sirius207/Link-Analysis/blob/master/Report.ipynb)
