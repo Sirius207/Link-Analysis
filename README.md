@@ -18,7 +18,7 @@ python main.py --input data/graph_1.txt --output output.csv
 - [SimRank](https://en.wikipedia.org/wiki/SimRank)
 
 ## Graph Dataset
-- Sample Graphs
+- 6 Sample Graphs
 - IBM Quest Synthetic Data Generator
 
 ## Report
